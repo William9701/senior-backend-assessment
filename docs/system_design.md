@@ -12,7 +12,7 @@ The system follows a microservices architecture, where each service operates ind
 - **Order Service** → Manages order placement, payments, and transactions.
 - **API Gateway** → Centralized entry point for handling requests.
 - **Message Queue (RabbitMQ/Kafka)** → Ensures asynchronous processing for tasks like email notifications.
-- **Database Layer (PostgreSQL)** → Stores persistent data.
+- **Database Layer (MySQL)** → Stores persistent data.
 - **Caching Layer (Redis)** → Speeds up frequent queries.
 - **Logging & Monitoring (Prometheus, Grafana, Winston)** → Observability.
 
@@ -27,7 +27,7 @@ graph TD;
     A -->|Places Order| D(Order Service)
     
     B -->|JWT Authentication| E[Auth System]
-    B -->|Stores Data| F[(PostgreSQL Database)]
+    B -->|Stores Data| F[(MySQL Database)]
     
     C -->|Manages Product Listings| F
     D -->|Manages Orders| F
@@ -66,7 +66,7 @@ Example: **User Registration Flow**
 
 ### **3.3 Deployment Diagram**
 This shows how services are deployed using Docker and Kubernetes.
-```mermaid
+```bash
 graph TD;
     subgraph Kubernetes Cluster
         subgraph API Layer
@@ -78,7 +78,7 @@ graph TD;
             D[Order Service]
         end
         subgraph Infrastructure
-            E[(PostgreSQL Database)]
+            E[(MySQL Database)]
             F[Redis Cache]
             G[Message Queue (RabbitMQ)]
         end
@@ -94,7 +94,7 @@ graph TD;
   - `POST /register` → Registers a new user.
   - `POST /login` → Authenticates a user.
   - `GET /users/:id` → Retrieves user details.
-- **Database:** Stores user data in PostgreSQL.
+- **Database:** Stores user data in MySQL.
 - **Security:** Password hashing with bcrypt, JWT for authentication.
 
 ### **4.2 Product Service**
@@ -104,7 +104,7 @@ graph TD;
   - `GET /products/:id` → Fetches product details.
   - `PUT /products/:id` → Updates product details.
   - `DELETE /products/:id` → Deletes a product.
-- **Database:** Stores product information in PostgreSQL.
+- **Database:** Stores product information in MySQL.
 
 ### **4.3 Order Service**
 - **Responsibilities:** Manages orders, payments, and transactions.
@@ -112,7 +112,7 @@ graph TD;
   - `POST /orders` → Places an order.
   - `GET /orders/:id` → Fetches order details.
   - `PUT /orders/:id/cancel` → Cancels an order.
-- **Database:** Stores order records in PostgreSQL.
+- **Database:** Stores order records in MySQL.
 
 ## **5. Communication Between Services**
 - **Synchronous Communication:** REST APIs for direct service-to-service calls.
